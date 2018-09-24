@@ -1,0 +1,49 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-image: url("C:/Users/Tim/Codelab/Star Wars RPG/assets/images/versus.jpg");
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-color: black;
+    
+    
+}
+
+h1 {
+    color: #b3b3ff;
+    font-size: 70px;
+    margin 0 auto;
+    text-align: center;
+}
+
+#container {
+    width: 800px;
+    height: 800px;
+    margin-left: 100px;
+    background-color: aqua;
+    opacity: 0.5;
+    
+}
+
+#chooseplayer, #enemy, #fightsection, #defender {
+    width: 800px;
+    height: 35px;
+    background-color: purple;
+    color: #b3b3ff;
+    font-size: 30px;
+    padding-top: 5px;
+}
+
+#playerField1, #enemyfield, #defenderField {
+    width: 800px;
+    height: 200px;
+    background-color: yellow;
+}
+
+.player {
+    height: 180px;
+    width: 180px;
+    float: left;
+    background-color: lightblue;
+    margin: 10px;
+}
