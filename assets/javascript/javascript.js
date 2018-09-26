@@ -1,6 +1,3 @@
-
-var counter = 0;
-var counter2 = 0;
 var bcounter = 0;
 var playerChosen;
 var enemyChosen;
@@ -21,19 +18,18 @@ $(document).ready(function() {
     /////////get playerChosen on Click/////////////////
     $(".one").on("click", function(event) {   
        ///////get attacker////////
-       if (counter === 0) {
+       if ($("#enemyField > div").length < 1) {
           playerChosen = $(this);
           playerChosen.removeClass("one");
           playerChosen.addClass("hero");
           $("#enemyField").append($(".one"));
-          counter = counter + 1;
+
        }
-       else if (counter === 1 || counter2 === 1) {
+       else if ($("#defenderField > div").length < 1) {
           enemyChosen = $(this);
           $("#defenderField").append(enemyChosen);
-          counter = counter + 1;
        }
-       console.log($("#defenderField > div").length);
+       console.log($("#enemyField > div").length);
        
     });
 
@@ -59,7 +55,6 @@ $(document).ready(function() {
 
            if (enemyHp <= 0) {
                $("#defenderField").empty();
-               counter2++;
 
            }
     
