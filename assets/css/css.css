@@ -32,12 +32,12 @@ h1 {
     padding-top: 5px;
 }
 
-#playerField1, #enemyfield, #defenderField {
+#playerField1, #enemyField, #defenderField {
     width: 800px;
     height: 200px;
 }
 
-.player, .box {
+#obi, #maul, #jin, #sid {
     height: 180px;
     width: 180px;
     float: left;
@@ -46,9 +46,4 @@ h1 {
     color: red;
     font-size: 25px;
     background-color: aqua;
-}
-
-.villian {
-    background-color: red;
-    color: black;
 }
