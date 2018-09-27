@@ -1,11 +1,12 @@
 var bcounter = 0;
 var playerChosen;
 var enemyChosen;
-var heroHp;
+var heroHp = 1;
 var heroHit;
 var heroHitMult;
 var emenyHp
 var enemyHit;
+var gameOver = false;
 
 
 $(document).ready(function() {
@@ -18,25 +19,25 @@ $(document).ready(function() {
     /////////get playerChosen on Click/////////////////
     $(".one").on("click", function(event) {   
        ///////get attacker////////
-       if ($("#enemyField > div").length < 1) {
+       if ($("#enemyField > div").length < 1 && $("#defenderField > div").length < 1) {
           playerChosen = $(this);
           playerChosen.removeClass("one");
           playerChosen.addClass("hero");
           $("#enemyField").append($(".one"));
-
        }
+
        else if ($("#defenderField > div").length < 1) {
           enemyChosen = $(this);
-          $("#defenderField").append(enemyChosen);
+          if (enemyChosen.attr("class") !== "hero" && enemyChosen.attr("class") !== "dead") {
+             $("#defenderField").append(enemyChosen);
+          }
        }
-       console.log($("#enemyField > div").length);
-       
     });
 
     ////////////////battle////////////////////
     $("#attack").on("click", function(event) { 
         /////////attack if opponent present in defenderField/////
-        if ($("#defenderField > div").length > 0) {
+        if ($("#defenderField > div").length > 0 && heroHp > 0) {
            heroHp = playerChosen.attr("data-hp");
            heroHit = playerChosen.attr("data-atk");
            enemyHp = enemyChosen.attr("data-hp");
@@ -45,23 +46,40 @@ $(document).ready(function() {
            heroHp = heroHp - enemyHit;
            playerChosen.attr("data-hp", heroHp);
            $(playerChosen).text(heroHp);
-           bcounter++;
+           bcounter++; 
            
-           if (enemyHp > 0) {
+           if (enemyHp > 0 && heroHp > 0) {
               enemyHp = enemyHp - (heroHit * bcounter);
               enemyChosen.attr("data-hp", enemyHp);
               $(enemyChosen).text(enemyHp);
+              ////////send text update////////////////
+              $("#update").text("You attacked " + enemyChosen.attr("id") +" for " + (heroHit * bcounter) + " damage, he attacked you for " + enemyChosen.attr("data-catk") + " damage.");
+            }
+           if (enemyHp <= 0 && heroHp >= 0) {
+               $("#update").text("You have defeated " + enemyChosen.attr("id") +"!");
+               enemyChosen.addClass("dead");
+               $("#hide").append(enemyChosen);
            }
-
-           if (enemyHp <= 0) {
-               $("#defenderField").empty();
-
+           if (heroHp <= 0 && enemyHp > 0) {
+              $("#update").text("You have been defeated, press reset button to try again.");
+              ///////dont add a second reset button//////
+              if (gameOver === false) {
+                 $("#resetField").append("<button id='reset' value='button'>Reset</button>");
+                 gameOver = true;
+              }
            }
-    
-
         }
+    }); 
+    ////////////////Reset Game////////////////////
+    $("#resetField").on("click", function(event) { 
+       $("#obi").text($("#obi").attr("data-hpB"));
+       $("#maul").text($("#maul").attr("data-hpB"));
+       $("#sid").text($("#sid").attr("data-hpB"));
+       $("#jin").text($("#jin").attr("data-hpB"));
+       
 
-
-    });   
+       alert("Game Over");
+       $("#resetField").empty();
+    });
 });
 
