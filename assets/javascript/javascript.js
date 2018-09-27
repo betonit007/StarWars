@@ -1,4 +1,4 @@
-var bcounter = 0;
+var bcounter = 1;
 var playerChosen;
 var enemyChosen;
 var heroHp = 1;
@@ -62,15 +62,16 @@ $(document).ready(function() {
            enemyHp = enemyChosen.attr("data-hp");
            enemyHit = enemyChosen.attr("data-catk");
 
-           heroHp = heroHp - enemyHit;
-           playerChosen.attr("data-hp", heroHp);
-           $(playerChosen).text(heroHp);
-           bcounter++; 
+           enemyHp = enemyHp - (heroHit * bcounter);
+           enemyChosen.attr("data-hp", enemyHp);
+           $(enemyChosen).text(enemyHp);
+           
            
            if (enemyHp > 0 && heroHp > 0) {
-              enemyHp = enemyHp - (heroHit * bcounter);
-              enemyChosen.attr("data-hp", enemyHp);
-              $(enemyChosen).text(enemyHp);
+             heroHp = heroHp - enemyHit;
+             playerChosen.attr("data-hp", heroHp);
+             $(playerChosen).text(heroHp);
+             bcounter++; 
               ////////send text update////////////////
               $("#update").text("You attacked " + enemyChosen.attr("id") +" for " + (heroHit * bcounter) + " damage, he attacked you for " + enemyChosen.attr("data-catk") + " damage.");
             }
