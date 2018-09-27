@@ -7,14 +7,33 @@ var heroHitMult;
 var emenyHp
 var enemyHit;
 var gameOver = false;
+////////////functions/////////////////////////////
 
+/////////////reset attributes//////////////////////
+function resetHpById(p1, p2, p3, p4) {
+    $(p1).attr("data-hp", $(p1).attr("data-hpB"));
+    $(p2).attr("data-hp", $(p2).attr("data-hpB"));
+    $(p3).attr("data-hp", $(p3).attr("data-hpB"));
+    $(p4).attr("data-hp", $(p4).attr("data-hpB"));
+}
+
+////////////get hp attributes///////////////////
+function getHpAttributesById(p1, p2, p3, p4) {
+    $(p1).text($(p1).attr("data-hp"));
+    $(p2).text($(p2).attr("data-hp"));
+    $(p3).text($(p3).attr("data-hp"));
+    $(p4).text($(p4).attr("data-hp"));
+}
+
+
+
+
+
+////////////////////////////////////////////////////////Main Body//////////////////////////////////////////
 
 $(document).ready(function() {
     /////////////show players hit points//////////
-    $("#obi").text($("#obi").attr("data-hp"));
-    $("#maul").text($("#maul").attr("data-hp"));
-    $("#sid").text($("#sid").attr("data-hp"));
-    $("#jin").text($("#jin").attr("data-hp"));
+    getHpAttributesById("#obi", "#maul", "#jin", "#sid");
 
     /////////get playerChosen on Click/////////////////
     $(".one").on("click", function(event) {   
@@ -72,11 +91,9 @@ $(document).ready(function() {
     }); 
     ////////////////Reset Game////////////////////
     $("#resetField").on("click", function(event) { 
-       $("#obi").text($("#obi").attr("data-hpB"));
-       $("#maul").text($("#maul").attr("data-hpB"));
-       $("#sid").text($("#sid").attr("data-hpB"));
-       $("#jin").text($("#jin").attr("data-hpB"));
-       
+        ////////reset hp attribute////////////////
+        resetHpById("#obi", "#maul", "#sid", "#jin");
+        getHpAttributesById("#obi", "#maul", "#jin", "#sid");
 
        alert("Game Over");
        $("#resetField").empty();
