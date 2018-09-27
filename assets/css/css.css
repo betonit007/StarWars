@@ -37,7 +37,7 @@ h1 {
     height: 200px;
 }
 
-#obi, #maul, #jin, #sid {
+#maul, #jin, #sid {
     height: 180px;
     width: 180px;
     float: left;
@@ -45,7 +45,6 @@ h1 {
     cursor: pointer;
     color: red;
     font-size: 25px;
-    background-color: aqua;
 }
 
 #hide {
@@ -72,4 +71,17 @@ h1 {
 
 #defender {
     clear: left;
+}
+
+#bossk {
+    background-image: url("C:/Users/timna/OneDrive/Desktop/temp img/bossk.png");
+    background-repeat: no-repeat;
+    background-position:center;
+    height: 180px;
+    width: 180px;
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+    color: red;
+    font-size: 25px;
 }

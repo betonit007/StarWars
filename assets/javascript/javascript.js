@@ -33,7 +33,7 @@ function getHpAttributesById(p1, p2, p3, p4) {
 
 $(document).ready(function() {
     /////////////show players hit points//////////
-    getHpAttributesById("#obi", "#maul", "#jin", "#sid");
+    getHpAttributesById("#bossk", "#maul", "#jin", "#sid");
 
     /////////get playerChosen on Click/////////////////
     $(".one").on("click", function(event) {   
@@ -92,8 +92,8 @@ $(document).ready(function() {
     ////////////////Reset Game////////////////////
     $("#resetField").on("click", function(event) { 
         ////////reset hp attribute////////////////
-        resetHpById("#obi", "#maul", "#sid", "#jin");
-        getHpAttributesById("#obi", "#maul", "#jin", "#sid");
+        resetHpById("#bossk", "#maul", "#sid", "#jin");
+        getHpAttributesById("#bossk", "#maul", "#jin", "#sid");
 
        alert("Game Over");
        $("#resetField").empty();
