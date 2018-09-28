@@ -25,6 +25,14 @@ function getHpAttributesById(p1, p2, p3, p4) {
     $(p4).text($(p4).attr("data-hp"));
 }
 
+//////////reset classes/////////////////////
+function resetClassesById() {
+var resets = $(".reset");
+for (var i = 0; i < resets.length; i++) {
+    console.log(resets[i]);
+}
+}
+
 
 
 
@@ -55,6 +63,7 @@ $(document).ready(function() {
 
     ////////////////battle////////////////////
     $("#attack").on("click", function(event) { 
+        
         /////////attack if opponent present in defenderField/////
         if ($("#defenderField > div").length > 0 && heroHp > 0) {
            heroHp = playerChosen.attr("data-hp");
@@ -79,13 +88,18 @@ $(document).ready(function() {
                $("#update").text("You have defeated " + enemyChosen.attr("id") +"!");
                enemyChosen.addClass("dead");
                $("#hide").append(enemyChosen);
+               /////////WINNER////////////////////////////////
+               if ($("#hide > div").length === 3) {
+                 $("#update").text("You won the Battle of the BountyHunters!");
+                 $("#resetField").append("<button id='reset' value='button'>Reset</button>");
+                }
            }
            if (heroHp <= 0 && enemyHp > 0) {
               $("#update").text("You have been defeated, press reset button to try again.");
               ///////dont add a second reset button//////
               if (gameOver === false) {
                  $("#resetField").append("<button id='reset' value='button'>Reset</button>");
-                 gameOver = true;
+                 
               }
            }
         }
@@ -96,8 +110,15 @@ $(document).ready(function() {
         resetHpById("#bossk", "#maul", "#sid", "#jin");
         getHpAttributesById("#bossk", "#maul", "#jin", "#sid");
 
-       alert("Game Over");
        $("#resetField").empty();
+       ////////reset hero class character/////////
+       $(".hero").addClass("one");
+       $(".hero").removeClass("hero");
+       $("#update").empty();
+       $("#playerField1").append($(".one"));
+       bcounter = 1;
+       heroHp = 1;
+       gameover = false;
     });
 });
 
