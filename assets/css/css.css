@@ -44,7 +44,7 @@ h1 {
     height: 200px;
 }
 
-#maul, #jin, #sid {
+#BobbaFett, #Dengar, #Greedo {
     height: 180px;
     width: 180px;
     float: left;
@@ -80,8 +80,21 @@ h1 {
     clear: left;
 }
 
-#bossk {
+#Bossk {
     background-image: url("https://betonit007.github.io/StarWars/assets/images/bossk.png");
+    background-repeat: no-repeat;
+    background-position:center;
+    height: 180px;
+    width: 180px;
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+    color: red;
+    font-size: 25px;
+}
+
+#Dengar {
+    background-image: url("https://betonit007.github.io/StarWars/assets/images/dengar.png");
     background-repeat: no-repeat;
     background-position:center;
     height: 180px;

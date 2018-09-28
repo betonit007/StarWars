@@ -41,7 +41,7 @@ for (var i = 0; i < resets.length; i++) {
 
 $(document).ready(function() {
     /////////////show players hit points//////////
-    getHpAttributesById("#bossk", "#maul", "#jin", "#sid");
+    getHpAttributesById("#Bossk", "#Dengar", "#Greedo", "#BobbaFett");
 
     /////////get playerChosen on Click/////////////////
     $(".one").on("click", function(event) {   
@@ -107,8 +107,8 @@ $(document).ready(function() {
     ////////////////Reset Game////////////////////
     $("#resetField").on("click", function(event) { 
         ////////reset hp attribute////////////////
-        resetHpById("#bossk", "#maul", "#sid", "#jin");
-        getHpAttributesById("#bossk", "#maul", "#jin", "#sid");
+        resetHpById("#Bossk", "#Dengar", "#BobbaFett", "#Greedo");
+        getHpAttributesById("#Bossk", "#Dengar", "#Greedo", "#BobbaFett");
 
        $("#resetField").empty();
        ////////reset hero class character/////////
