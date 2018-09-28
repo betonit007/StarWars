@@ -1,4 +1,4 @@
-var bcounter = 0;
+var bcounter = 1;
 var playerChosen;
 var enemyChosen;
 var heroHp = 1;
