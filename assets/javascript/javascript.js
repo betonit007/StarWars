@@ -40,6 +40,9 @@ for (var i = 0; i < resets.length; i++) {
 ////////////////////////////////////////////////////////Main Body//////////////////////////////////////////
 
 $(document).ready(function() {
+
+    ///////////////////sounds//////////////////////////////
+    var blaster =  new Audio("assets/sounds/blasterfire.mp3")
     /////////////show players hit points//////////
     getHpAttributesById("#Bossk", "#Dengar", "#Greedo", "#BobbaFett");
 
@@ -74,15 +77,15 @@ $(document).ready(function() {
            enemyHp = enemyHp - (heroHit * bcounter);
            enemyChosen.attr("data-hp", enemyHp);
            $(enemyChosen).text(enemyHp);
-           
+           blaster.play();
            
            if (enemyHp > 0 && heroHp > 0) {
              heroHp = heroHp - enemyHit;
              playerChosen.attr("data-hp", heroHp);
              $(playerChosen).text(heroHp);
-             bcounter++; 
               ////////send text update////////////////
               $("#update").text("You attacked " + enemyChosen.attr("id") +" for " + (heroHit * bcounter) + " damage, he attacked you for " + enemyChosen.attr("data-catk") + " damage.");
+              bcounter++; 
             }
            if (enemyHp <= 0 && heroHp >= 0) {
                $("#update").text("You have defeated " + enemyChosen.attr("id") +"!");
