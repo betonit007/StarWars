@@ -7,6 +7,8 @@ var heroHitMult;
 var emenyHp
 var enemyHit;
 var gameOver = false;
+var randomBonusPlayer;
+var randomBonusEnemy;
 ////////////functions/////////////////////////////
 
 /////////////reset attributes//////////////////////
@@ -73,18 +75,23 @@ $(document).ready(function() {
            heroHit = playerChosen.attr("data-atk");
            enemyHp = enemyChosen.attr("data-hp");
            enemyHit = enemyChosen.attr("data-catk");
-
-           enemyHp = enemyHp - (heroHit * bcounter);
+           
+           randomBonusPlayer = (Math.floor(Math.random() * 5));
+           randomBonusEnemy = (Math.floor(Math.random() * 7));
+           console.log("Random Player Bonus " + randomBonusPlayer);
+           enemyHp = enemyHp - ((heroHit * bcounter) + randomBonusPlayer);
            enemyChosen.attr("data-hp", enemyHp);
            $(enemyChosen).text(enemyHp);
            blaster.play();
            
            if (enemyHp > 0 && heroHp > 0) {
-             heroHp = heroHp - enemyHit;
+             heroHp = heroHp - (parseInt(enemyHit) + randomBonusEnemy);
+             console.log("Enemy Bonus " + randomBonusEnemy);
+             console.log("Enemy Hit Damage with Bonus " + (parseInt(enemyHit) + randomBonusEnemy));
              playerChosen.attr("data-hp", heroHp);
              $(playerChosen).text(heroHp);
               ////////send text update////////////////
-              $("#update").text("You attacked " + enemyChosen.attr("id") +" for " + (heroHit * bcounter) + " damage, he attacked you for " + enemyChosen.attr("data-catk") + " damage.");
+              $("#update").text("You attacked " + enemyChosen.attr("id") +" for " + ((heroHit * bcounter) + randomBonusPlayer) + " damage, he attacked you for " + (parseInt(enemyHit)+randomBonusEnemy));
               bcounter++; 
             }
            if (enemyHp <= 0 && heroHp >= 0) {
