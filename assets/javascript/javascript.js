@@ -94,6 +94,7 @@ $(document).ready(function() {
            ///////add class fire to make player shake/////////////
            playerChosen.addClass("fire");
            setTimeout("playerChosen.removeClass('fire')", 700);
+           console.log(heroHit * bcounter);
            
            if (enemyHp > 0 && heroHp > 0) {
              heroHp = heroHp - (parseInt(enemyHit) + randomBonusEnemy);
