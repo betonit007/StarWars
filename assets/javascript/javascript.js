@@ -9,6 +9,9 @@ var enemyHit;
 var gameOver = false;
 var randomBonusPlayer;
 var randomBonusEnemy;
+///////////////////sounds//////////////////////////////
+var blaster =  new Audio("assets/sounds/blasterfire.mp3");
+var winning = new Audio("assests/sounds/Cantina.mp3");
 ////////////functions/////////////////////////////
 
 /////////////reset attributes//////////////////////
@@ -43,15 +46,18 @@ for (var i = 0; i < resets.length; i++) {
 
 $(document).ready(function() {
 
-    ///////////////////sounds//////////////////////////////
-    var blaster =  new Audio("assets/sounds/blasterfire.mp3")
+
     /////////////show players hit points//////////
     getHpAttributesById("#Bossk", "#Dengar", "#Greedo", "#BobbaFett");
 
     /////////get playerChosen on Click/////////////////
     $(".one").on("click", function(event) {   
+       ///////if all characters already defeated//////
+       if ($("#hide > div").length === 3) {
+        $("#update").text("The battle is over, press reset to play again.");  
+       }
        ///////get attacker////////
-       if ($("#enemyField > div").length < 1 && $("#defenderField > div").length < 1) {
+       else if ($("#enemyField > div").length < 1 && $("#defenderField > div").length < 1) {
           playerChosen = $(this);
           playerChosen.removeClass("one");
           playerChosen.addClass("hero");
@@ -76,36 +82,45 @@ $(document).ready(function() {
            enemyHp = enemyChosen.attr("data-hp");
            enemyHit = enemyChosen.attr("data-catk");
            
-           randomBonusPlayer = (Math.floor(Math.random() * 5));
-           randomBonusEnemy = (Math.floor(Math.random() * 7));
-           console.log("Random Player Bonus " + randomBonusPlayer);
+           randomBonusPlayer = (Math.floor(Math.random() * 10));
+           console.log("Random Player Bonus: " + randomBonusPlayer);
+           randomBonusEnemy = (Math.floor(Math.random() * 5));
+           console.log("Random Enemy Bonus " + randomBonusEnemy);
            enemyHp = enemyHp - ((heroHit * bcounter) + randomBonusPlayer);
+           console.log("Player Attack " + heroHit * bcounter);
            enemyChosen.attr("data-hp", enemyHp);
            $(enemyChosen).text(enemyHp);
            blaster.play();
+           ///////add class fire to make player shake/////////////
+           playerChosen.addClass("fire");
+           setTimeout("playerChosen.removeClass('fire')", 700);
            
            if (enemyHp > 0 && heroHp > 0) {
              heroHp = heroHp - (parseInt(enemyHit) + randomBonusEnemy);
-             console.log("Enemy Bonus " + randomBonusEnemy);
-             console.log("Enemy Hit Damage with Bonus " + (parseInt(enemyHit) + randomBonusEnemy));
              playerChosen.attr("data-hp", heroHp);
-             $(playerChosen).text(heroHp);
-              ////////send text update////////////////
-              $("#update").text("You attacked " + enemyChosen.attr("id") +" for " + ((heroHit * bcounter) + randomBonusPlayer) + " damage, he attacked you for " + (parseInt(enemyHit)+randomBonusEnemy));
-              bcounter++; 
+             setTimeout(function(){ $(playerChosen).text(heroHp); }, 1500);
+             ///////Enemy fires back at player//////////////////////
+             setTimeout("blaster.play()", 1200);
+             ///////add class fire to make player shake/////////////
+             setTimeout("enemyChosen.addClass('fire')", 1200);
+             setTimeout("enemyChosen.removeClass('fire')", 1900);
+             ////////send text update////////////////
+             setTimeout(function(){ $("#update").text("You attacked " + enemyChosen.attr("id") +" for " + ((heroHit * bcounter) + randomBonusPlayer) + " damage, he attacked you for " + (parseInt(enemyHit)+randomBonusEnemy)); }, 2000);
+             setTimeout("bcounter++;", 2000);
+
             }
            if (enemyHp <= 0 && heroHp >= 0) {
-               $("#update").text("You have defeated " + enemyChosen.attr("id") +"!");
+               setTimeout(function(){ $("#update").text("You have defeated " + enemyChosen.attr("id") +"!"); }, 1000);
                enemyChosen.addClass("dead");
                $("#hide").append(enemyChosen);
                /////////WINNER////////////////////////////////
                if ($("#hide > div").length === 3) {
-                 $("#update").text("You won the Battle of the BountyHunters!");
-                 $("#resetField").append("<button id='reset' value='button'>Reset</button>");
+                 setTimeout(function(){ $("#update").text("You won the Battle of the BountyHunters!"); }, 1200);
+                 setTimeout(function(){  $("#resetField").append("<button id='reset' value='button'>Reset</button>"); }, 1200);
                 }
            }
            if (heroHp <= 0 && enemyHp > 0) {
-              $("#update").text("You have been defeated, press reset button to try again.");
+              setTimeout(function(){ $("#update").text("You have been defeated, press reset button to try again."); }, 2000);
               ///////dont add a second reset button//////
               if (gameOver === false) {
                  $("#resetField").append("<button id='reset' value='button'>Reset</button>");
