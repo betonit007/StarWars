@@ -12,6 +12,7 @@ var randomBonusEnemy;
 ///////////////////sounds//////////////////////////////
 var blaster =  new Audio("assets/sounds/blasterfire.mp3");
 var winning = new Audio("assets/sounds/cantuna.mp3");
+var jabba = new Audio("assets/sounds/jabba.mp3");
 ////////////functions/////////////////////////////
 
 /////////////reset attributes//////////////////////
@@ -52,6 +53,7 @@ $(document).ready(function() {
 
     /////////get playerChosen on Click/////////////////
     $(".one").on("click", function(event) {   
+        $("#update").text("");
        ///////if all characters already defeated//////
        if ($("#hide > div").length === 3) {
         $("#update").text("The battle is over, press reset to play again.");  
@@ -108,22 +110,26 @@ $(document).ready(function() {
 
             }
            if (enemyHp <= 0 && heroHp >= 0) {
-               setTimeout(function(){ $("#update").text("You have defeated " + enemyChosen.attr("id") +"!"); }, 1000);
+               setTimeout(function(){ $("#update").text("You have defeated " + enemyChosen.attr("id") +"!"); }, 700);
                enemyChosen.addClass("dead");
                $("#hide").append(enemyChosen);
+               if ($("#hide > div").length < 3) 
+               {setTimeout(function(){ $("#update").text("Select your next opponent."); }, 3000);
+           }
                /////////WINNER////////////////////////////////
                if ($("#hide > div").length === 3) {
                  setTimeout("playerChosen.addClass('fire')", 1000);
-                 setTimeout(function(){ winning.play(); }, 1100);
+                 setTimeout(function(){ winning.play(); }, 1000);
                  setTimeout(function(){ $("#update").text("You won the Battle of the BountyHunters!"); }, 1200);
                  setTimeout(function(){  $("#resetField").append("<button id='reset' value='button'>Reset</button>"); }, 1200);
                 }
            }
            if (heroHp <= 0 && enemyHp > 0) {
-              setTimeout(function(){ $("#update").text("You have been defeated, press reset button to try again."); }, 2000);
+              setTimeout(function(){ jabba.play(); }, 1500);
+              setTimeout(function(){ $("#update").text("You have been defeated by " + enemyChosen.attr("id") + ", press reset button to try again."); }, 2000);
               ///////dont add a second reset button//////
               if (gameOver === false) {
-                 $("#resetField").append("<button id='reset' value='button'>Reset</button>");
+                 setTimeout(function(){ $("#resetField").append("<button id='reset' value='button'>Reset</button>"); }, 2000);
                  
               }
            }
