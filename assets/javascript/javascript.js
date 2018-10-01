@@ -11,7 +11,7 @@ var randomBonusPlayer;
 var randomBonusEnemy;
 ///////////////////sounds//////////////////////////////
 var blaster =  new Audio("assets/sounds/blasterfire.mp3");
-var winning = new Audio("assests/sounds/Cantina.mp3");
+var winning = new Audio("assests/sounds/cantina.mp3");
 ////////////functions/////////////////////////////
 
 /////////////reset attributes//////////////////////
@@ -114,7 +114,7 @@ $(document).ready(function() {
                /////////WINNER////////////////////////////////
                if ($("#hide > div").length === 3) {
                  setTimeout("playerChosen.addClass('fire')", 1000);
-                 setTimeout(function(){ Cantina.play(); }, 1100);
+                 setTimeout(function(){ winning.play(); }, 1100);
                  setTimeout(function(){ $("#update").text("You won the Battle of the BountyHunters!"); }, 1200);
                  setTimeout(function(){  $("#resetField").append("<button id='reset' value='button'>Reset</button>"); }, 1200);
                 }
