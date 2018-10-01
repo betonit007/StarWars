@@ -11,7 +11,7 @@ var randomBonusPlayer;
 var randomBonusEnemy;
 ///////////////////sounds//////////////////////////////
 var blaster =  new Audio("assets/sounds/blasterfire.mp3");
-var winning = new Audio("assests/sounds/cantina.mp3");
+var winning = new Audio("assests/sounds/cantuna.mp3");
 ////////////functions/////////////////////////////
 
 /////////////reset attributes//////////////////////
