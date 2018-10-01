@@ -74,7 +74,8 @@ $(document).ready(function() {
 
     ////////////////battle////////////////////
     $("#attack").on("click", function(event) { 
-        
+        /////////Clear Update Field///////////
+        $("#update").text("");
         /////////attack if opponent present in defenderField/////
         if ($("#defenderField > div").length > 0 && heroHp > 0) {
            heroHp = playerChosen.attr("data-hp");
@@ -83,11 +84,8 @@ $(document).ready(function() {
            enemyHit = enemyChosen.attr("data-catk");
            
            randomBonusPlayer = (Math.floor(Math.random() * 10));
-           console.log("Random Player Bonus: " + randomBonusPlayer);
            randomBonusEnemy = (Math.floor(Math.random() * 5));
-           console.log("Random Enemy Bonus " + randomBonusEnemy);
            enemyHp = enemyHp - ((heroHit * bcounter) + randomBonusPlayer);
-           console.log("Player Attack " + heroHit * bcounter);
            enemyChosen.attr("data-hp", enemyHp);
            $(enemyChosen).text(enemyHp);
            blaster.play();
@@ -115,7 +113,8 @@ $(document).ready(function() {
                $("#hide").append(enemyChosen);
                /////////WINNER////////////////////////////////
                if ($("#hide > div").length === 3) {
-                 setTimeout(function(){ Cantina.play(); });
+                 setTimeout("playerChosen.addClass('fire')", 1000);
+                 setTimeout(function(){ Cantina.play(); }, 1100);
                  setTimeout(function(){ $("#update").text("You won the Battle of the BountyHunters!"); }, 1200);
                  setTimeout(function(){  $("#resetField").append("<button id='reset' value='button'>Reset</button>"); }, 1200);
                 }
@@ -132,6 +131,10 @@ $(document).ready(function() {
     }); 
     ////////////////Reset Game////////////////////
     $("#resetField").on("click", function(event) { 
+        ////////remove shake if player just won///
+        if ($(playerChosen).hasClass("fire")) {
+            $(playerChosen).removeClass("fire");
+        }
         ////////reset hp attribute////////////////
         resetHpById("#Bossk", "#Dengar", "#BobbaFett", "#Greedo");
         getHpAttributesById("#Bossk", "#Dengar", "#Greedo", "#BobbaFett");
