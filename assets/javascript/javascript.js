@@ -115,6 +115,7 @@ $(document).ready(function() {
                $("#hide").append(enemyChosen);
                /////////WINNER////////////////////////////////
                if ($("#hide > div").length === 3) {
+                 setTimeout(function(){ Cantina.play(); });
                  setTimeout(function(){ $("#update").text("You won the Battle of the BountyHunters!"); }, 1200);
                  setTimeout(function(){  $("#resetField").append("<button id='reset' value='button'>Reset</button>"); }, 1200);
                 }
